@@ -2,8 +2,8 @@ import os
 from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_community.vectorstores import FAISS
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_classic.chains import create_retrieval_chain
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 
 # Carrega as variáveis do .env
@@ -15,7 +15,7 @@ api_key = os.getenv("GOOGLE_API_KEY")
 def get_agent_chain():
     # Carrega os embeddings e o índice FAISS gerado anteriormente
     embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001",
+        model="gemini-embedding-001",
         google_api_key=api_key
     )
     
@@ -27,7 +27,7 @@ def get_agent_chain():
     
     # Configura o modelo LLM do Gemini
     llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
+        model="gemini-3.5-flash",
         temperature=0.2,
         google_api_key=api_key
     )
