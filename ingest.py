@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 load_dotenv()
 
 # Variáveis locais com os valores do arquivo .env
-document_path = os.getenv("DOCUMENT_PATH", "docs/Manual_Lumora_Semijoias_Ficticio.pdf")
+document_path = os.getenv("DOCUMENT_PATH", "docs\Manual_Lumora_Semijoias_Ficticio.pdf")
 api_key = os.getenv("GOOGLE_API_KEY")
 
 if not api_key:
@@ -30,7 +30,7 @@ print(f"Documento dividido em {len(chunks)} chunk(s).")
 
 print("Gerando embeddings e criando o vector store FAISS...")
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/embedding-001",
+    model="gemini-embedding-001",
     google_api_key=api_key
 )
 
