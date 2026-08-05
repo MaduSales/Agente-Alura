@@ -1,6 +1,6 @@
 from agent import get_agent_chain
 
-def main()
+def main():
     print("Inicializando Agente Lumora Semijoias...")
     try:
         chain = get_agent_chain()
@@ -11,7 +11,7 @@ def main()
     print("\nAgente Lumora iniciado! Digite 'sair' para encerrar.")
     while True:
         pergunta = input("\nFaça uma pergunta: ").strip()
-        if pergunta.lower() == "sair"
+        if pergunta.lower() == "sair":
             print("\nAté mais!")
             break
         if not pergunta:
