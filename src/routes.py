@@ -23,7 +23,7 @@ def chat():
     
     try:
         response = chain.invoke({"input":user_message}) # Envia pergunta para chain
-        answer = response.get("answer", str(response)) if isinstace(response, dict) else str(response) # Trata o texto da resposta em diversos casos
+        answer = response.get("answer", str(response)) if isinstance(response, dict) else str(response) # Trata o texto da resposta em diversos casos
         return jsonify({"response":answer})
 
         '''Retorna um dicionário:
