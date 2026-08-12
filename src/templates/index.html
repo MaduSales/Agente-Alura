@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente Lumora Semijoias</title>
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Cabeçalho do Chat -->
+        <header class="chat-header">
+            <h1>🎓 Instituto Lumina</h1>
+            <p>Secretaria Virtual e Suporte Acadêmico</p>
+        </header>
+
+        <!-- Área onde as mensagens aparecem -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message"> <!-- Mensagem automática -->
+                Olá! Sou o assistente virtual da nossa instituição de ensino. Como posso te ajudar com os cursos, matrículas ou suporte acadêmico hoje?
+            </div>
+        </div>
+
+        <!-- Área de digitação do usuário -->
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Digite sua dúvida..." autocomplete="off">
+            <button id="sendButton" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Link para o arquivo JavaScript separado -->
+    <script src="../static/script.js"></script>
+</body>
+</html>
