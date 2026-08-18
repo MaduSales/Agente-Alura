@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agente Lumora Semijoias</title>
+    <title>Agente Lumina</title>
     <!-- Link para o arquivo CSS -->
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon_study.png') }}" type="image/x-icon">
 </head>
 <body>
     <div class="chat-container">
@@ -17,9 +18,8 @@
 
         <!-- Área onde as mensagens aparecem -->
         <div class="chat-messages" id="chatMessages">
-            <div class="message bot-message"> <!-- Mensagem automática -->
-                Olá! Sou o assistente virtual da nossa instituição de ensino. Como posso te ajudar com os cursos, matrículas ou suporte acadêmico hoje?
-            </div>
+             <!-- Mensagem automática -->
+            <div class="message bot-message">Olá! Sou o assistente virtual da nossa instituição de ensino. Como posso te ajudar com os cursos, matrículas ou suporte acadêmico hoje?</div>
         </div>
 
         <!-- Área de digitação do usuário -->
@@ -30,6 +30,6 @@
     </div>
 
     <!-- Link para o arquivo JavaScript separado -->
-    <script src="../static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
