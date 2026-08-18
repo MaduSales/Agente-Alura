@@ -34,7 +34,7 @@ def get_agent_chain():
     
     # Prompt estrito para garantir que o agente responda apenas com base na documentação
     system_prompt = (
-        "Você é um assistente virtual oficial da Lumora Semijoias. "
+        "Você é um assistente virtual oficial do Instituto Lumina. "
         "Responda à pergunta do usuário utilizando exclusivamente o contexto recuperado abaixo. "
         "Se a informação não estiver presente no contexto, oriente educadamente o cliente a entrar em contato com o atendimento oficial. "
         "Nunca invente informações, prazos ou regras.\n\n"
