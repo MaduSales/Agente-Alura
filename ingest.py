@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 load_dotenv()
 
 # Variáveis locais com os valores do arquivo .env
-document_path = os.getenv("DOCUMENT_PATH", "docs\Manual_Instituto_Lumina.pdf")
+document_path = os.getenv("DOCUMENT_PATH", "docs/Manual_Instituto_Lumina.pdf")
 api_key = os.getenv("GOOGLE_API_KEY")
 
 if not api_key:
