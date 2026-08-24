@@ -27,7 +27,7 @@ def get_agent_chain():
     
     # Configura o modelo LLM do Gemini
     llm = ChatGoogleGenerativeAI(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         temperature=0.2,
         google_api_key=api_key
     )
