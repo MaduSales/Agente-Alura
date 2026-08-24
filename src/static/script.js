@@ -16,17 +16,17 @@ async function sendMessage() {
     // Se o campo estiver vazio, não faz nada
     if (!textoDigitado) return;
 
-    // 1. Mostra a mensagem do usuário na tela
+    // Mostra a mensagem do usuário na tela
     adicionarMensagemNaTela(textoDigitado, 'user-message');
     userInput.value = '';
     rolarParaBaixo();
 
-    // 2. Mostra o aviso de "Pensando..." enquanto o agente processa
+    // Mostra o aviso de "Pensando..." enquanto o agente processa
     const idCarregando = adicionarMensagemNaTela('Pensando...', 'bot-message loading');
     rolarParaBaixo();
 
     try {
-        // 3. Faz a requisição POST para a rota /chat do Flask
+        // Faz a requisição POST para a rota /chat do Flask
         const respostaServidor = await fetch('/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ async function sendMessage() {
         // Remove o balão de "Pensando..."
         document.getElementById(idCarregando).remove();
 
-        // 4. Exibe a resposta do agente ou uma mensagem de erro
+        // Exibe a resposta do agente ou uma mensagem de erro
         if (dados.response) {
             adicionarMensagemNaTela(dados.response, 'bot-message');
         } else {
@@ -61,7 +61,7 @@ function adicionarMensagemNaTela(texto, classeCss) {
     divMensagem.textContent = texto;
     
     // Cria um ID único baseado no tempo para conseguir remover o "Pensando..." depois
-    const idUnico = 'msg-' + Date.now();
+    const idUnico = 'msg-' + crypto.randomUUID();
     divMensagem.id = idUnico;
     
     chatMessages.appendChild(divMensagem);
