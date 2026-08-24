@@ -4,32 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agente Lumina</title>
-    <!-- Link para o arquivo CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon_study.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/sparkle_wand.png') }}" type="image/x-icon">
 </head>
 <body>
     <div class="chat-container">
-        <!-- Cabeçalho do Chat -->
         <header class="chat-header">
-            <h1>🎓 Instituto Lumina</h1>
-            <p>Secretaria Virtual e Suporte Acadêmico</p>
+            <div class="brand">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='img/sparkle_wand.png') }}" alt="Logo Lumina">
+                </div>
+
+                <div class="brand-text">
+                    <h1>LUMINA</h1>
+                    <p>Assistente de Suporte Acadêmico</p>
+                </div>
+            </div>
         </header>
-
-        <!-- Área onde as mensagens aparecem -->
-        <div class="chat-messages" id="chatMessages">
-             <!-- Mensagem automática -->
-            <div class="message bot-message">Olá! Sou o assistente virtual da nossa instituição de ensino. Como posso te ajudar com os cursos, matrículas ou suporte acadêmico hoje?</div>
-        </div>
-
-        <!-- Área de digitação do usuário -->
+        <main class="chat-messages" id="chatMessages">
+            <div class="message bot-message">Olá! Sou o assistente virtual da Lumina. Como posso te ajudar com os cursos, matrículas ou suporte acadêmico hoje?</div>
+        </main>
         <div class="chat-input-area">
             <input type="text" id="userInput" placeholder="Digite sua dúvida..." autocomplete="off">
-            <button id="sendButton" onclick="sendMessage()">Enviar</button>
+            <button id="sendButton" onclick="sendMessage()"><img src="{{ url_for('static', filename='img/paper_plane.png')}}" alt="Avião de papel" srcset=""></button>
         </div>
     </div>
-
-    <!-- Link para o arquivo JavaScript separado -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
