@@ -1,4 +1,3 @@
-// Seleciona os elementos principais da tela
 const chatMessages = document.getElementById('chatMessages');
 const userInput = document.getElementById('userInput');
 
@@ -54,6 +53,14 @@ async function sendMessage() {
     rolarParaBaixo();
 }
 
+function gerarIdUnico() {
+    // Tenta usar randomUUID se disponível
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    return Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+}
+
 // Função auxiliar para criar e inserir novos balões de mensagem no chat
 function adicionarMensagemNaTela(texto, classeCss) {
     const divMensagem = document.createElement('div');
@@ -61,7 +68,7 @@ function adicionarMensagemNaTela(texto, classeCss) {
     divMensagem.textContent = texto;
     
     // Cria um ID único baseado no tempo para conseguir remover o "Pensando..." depois
-    const idUnico = 'msg-' + crypto.randomUUID();
+    const idUnico = 'msg-' + gerarIdUnico();
     divMensagem.id = idUnico;
     
     chatMessages.appendChild(divMensagem);
