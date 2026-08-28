@@ -47,7 +47,6 @@ FAISS
 Base de conhecimento pronta
 ```
 ---
-<br>
 
 ### 2. Usuário faz uma pergunta
 
@@ -64,7 +63,6 @@ LangChain
 ```
 
 ---
-<br>
 
 ### 3. A pergunta é transformada em embedding
 
@@ -73,14 +71,12 @@ O **LangChain** atua como uma camada de integração entre os componentes utiliz
 A pergunta do usuário também é transformada em um **embedding** para comparar semanticamente a pergunta com os textos existentes na base. O objetivo não é simplesmente procurar palavras iguais, mas encontrar conteúdos que tenham significado semelhante.
 
 ---
-<br>
 
 ### 4. FAISS procura os documentos mais relevantes
 
 O embedding da pergunta é enviado para o **FAISS** que compara o embedding da pergunta com os embeddings armazenados anteriormente e identifica os documentos mais semelhantes. No caso do Agente Lumina, ficou configurado para retornar os **3 documentos mais relevantes**.
 
 ---
-<br>
 
 ### 5. RAG utiliza os documentos como contexto
 
@@ -92,7 +88,6 @@ O RAG é uma arquitetura que combina duas etapas:
 No Agente Lumina, o FAISS realiza a recuperação dos documentos relevantes e esses documentos são utilizados como **contexto para o modelo de IA**, ou seja, o modelo de IA irá gerar uma resposta humanizada com base nas informações retornadas.
 
 ---
-<br>
 
 ### 6. Gemini gera a resposta
 
@@ -101,14 +96,12 @@ O **Google Gemini 3.6 Flash** é o modelo de linguagem utilizado como motor de g
 A partir dessas informações, o Gemini interpreta o contexto e gera uma resposta adequada à pergunta.
 
 ---
-<br>
 
 ### 7. A resposta retorna para o usuário
 
 Depois que o Gemini gera a resposta, o resultado retorna pela aplicação Flask até o frontend.
 
 ---
-<br>
 
 ## 🛠️ Tecnologias utilizadas
 
