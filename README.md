@@ -217,6 +217,13 @@ Considerando desde a pergunta do usuário até a infraestrutura de Cloud, o func
                             │
                             ↓
                          Usuário
+
+## 📚 Base de conhecimento
+
+O Agente Lumina utiliza uma base de conhecimento previamente processada para realizar a busca vetorial e gerar suas respostas.
+
+📄 **[Visualizar a base de conhecimento utilizada](docs/Manual_Instituto_Lumina.pdf)**
+
 ## 👩‍💻 Desenvolvido por
 
 **Maria Eduarda de Sales Miranda**
