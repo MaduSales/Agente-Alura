@@ -1,67 +1,224 @@
-# Agente de Inteligência Artificial - Projeto Oracle Next Education (Tech Builder IA)
+# 🤖 Agente Lumina
 
-# 🎓 Instituto Lumina - Agente de Inteligência Artificial & RAG
+> Agente de Inteligência Artificial desenvolvido durante o **Tech IA Builder do Oracle Next Education (ONE)**, com foco em Inteligência Artificial Generativa, RAG, dados e Cloud.
 
-<div align="center">
+O **Agente Lumina** é uma aplicação de Inteligência Artificial capaz de responder perguntas utilizando informações específicas de uma base de conhecimento previamente carregada.
 
-![Status do Projeto](https://img.shields.io/badge/Status-Concluído-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![LangChain](https://img.shields.io/badge/LangChain-Orquestração-orange)
-![Gemini](https://img.shields.io/badge/Google%20Gemini-LLM-blueviolet)
-![Flask](https://img.shields.io/badge/Flask-Web-lightgrey)
+O projeto foi desenvolvido como parte da formação **Tech IA Builder do Oracle Next Education (ONE)**, uma etapa avançada do programa voltada para **Inteligência Artificial, Automação, Dados e Cloud**, e também contempla o desafio proposto pela **Alura**.
 
-*Assistente virtual inteligente desenvolvido para a Secretaria Virtual e Suporte Acadêmico do Instituto Lumina, utilizando técnicas avançadas de RAG (Retrieval-Augmented Generation).*
+A solução utiliza uma arquitetura baseada em **RAG (Retrieval-Augmented Generation)**, permitindo que o agente consulte uma base de conhecimento antes de gerar suas respostas.
 
-</div>
+Em vez de depender somente do conhecimento geral do modelo de IA, o agente realiza uma busca por informações relevantes e utiliza os documentos encontrados como contexto para o **Google Gemini** gerar a resposta.
 
 ---
 
-## 📋 Sobre o Projeto
-O **Instituto Lumina** é uma instituição educacional fictícia criada para este desafio. O objetivo deste projeto foi desenvolver um **Agente de IA especializado** capaz de responder a dúvidas de estudantes e interessados com base estrita na base de conhecimento oficial da instituição (Manual Corporativo em PDF), evitando alucinações e garantindo respostas precisas sobre cursos, prazos, formas de pagamento e políticas acadêmicas.
+## 🎯 Sobre o projeto
+
+O Agente Lumina foi desenvolvido com o objetivo de colocar em prática conceitos de **Inteligência Artificial Generativa**, integração com modelos de linguagem, busca vetorial e arquitetura RAG.
+
+A ideia principal é:
+
+**Usuário faz uma pergunta → o sistema busca informações relevantes → essas informações são utilizadas como contexto → o Gemini gera a resposta.**
+
+O projeto também permitiu trabalhar com diferentes etapas do desenvolvimento de uma aplicação real, desde a construção do agente e da interface até sua **containerização com Docker e implantação em Cloud utilizando a Oracle Cloud Infrastructure (OCI)**.
 
 ---
 
-## 🛠️ Arquitetura da Solução (RAG)
-O fluxo da informação segue o padrão moderno de RAG (Recuperação Aumentada por Recuperação):
+## 🧠 Como funciona?
+
+O funcionamento do Agente Lumina pode ser dividido em etapas:
+
+### 1. Preparação da base de conhecimento
+
+Antes de o usuário fazer uma pergunta, os documentos utilizados pelo agente precisam ser processados.
+
+O conteúdo é transformado em **embeddings** (representações numéricas que representam semanticamente os textos). Esses embeddings são armazenados no **FAISS** (como se fosse um banco de dados vetorial), permitindo realizar buscas por similaridade posteriormente.
 
 ```text
-[ Documento PDF (Manual Lumina) ] 
-       │
-       ▼
-[ Chunking (RecursiveCharacterTextSplitter) ]
-       │
-       ▼
-[ Geração de Embeddings (GoogleGenerativeAIEmbeddings) ]
-       │
-       ▼
-[ Vector Store Local (FAISS) ] ◄── [ Pergunta do Usuário ]
-       │                                     │
-       └──────────────┬──────────────────────┘
-                      ▼
-     [ Busca de Contexto Relevante ]
-                      │
-                      ▼
-     [ LLM (Gemini) + Prompt do Sistema ]
-                      │
-                      ▼
-     [ Resposta Acolhedora e Precisa ao Aluno ]
+Documentos
+    ↓
+Processamento do conteúdo
+    ↓
+Embeddings
+    ↓
+FAISS
+    ↓
+Base de conhecimento pronta
 ```
-
-## 🚀 Tecnologias Utilizadas
-
-* **Python** (Linguagem principal)
-* **LangChain** (Framework para orquestração de LLMs e pipelines de RAG)
-* **Google Generative AI (Gemini)** (Modelo de linguagem e embeddings)
-* **FAISS (CPU)** (Banco de dados vetorial leve e em memória)
-* **Flask** (Framework web para a interface de chat)
-* **PyPDF** (Extração de texto de documentos)
 
 ---
 
-## 💬 Exemplos Reais de Interações
+### 2. Usuário faz uma pergunta
 
-* **Pergunta do Aluno:** *"Quais são as formas de pagamento aceitas e posso parcelar?"*
-  * **Resposta do Agente:** *"Aceitamos PIX, boleto bancário e cartões de crédito. O parcelamento pode ser feito em até 6x sem juros no cartão de crédito, respeitando o valor mínimo da parcela estipulado no checkout."*
+Quando o usuário envia uma pergunta pelo chat, ela é recebida pela aplicação desenvolvida em **Python + Flask**.
 
-* **Pergunta do Aluno:** *"Me arrependi da compra do curso. Posso pedir reembolso?"*
-  * **Resposta do Agente:** *"Sim! Você tem o direito de cancelamento e reembolso integral garantido em até sete (7) dias corridos contados a partir da data de contratação do curso."*
+```text
+Usuário
+   ↓
+Frontend
+   ↓
+API Flask
+   ↓
+LangChain
+```
+
+---
+
+### 3. A pergunta é transformada em embedding
+
+O **LangChain** atua como uma camada de integração entre os componentes utilizados no projeto.
+
+A pergunta do usuário também é transformada em um **embedding** para comparar semanticamente a pergunta com os textos existentes na base. O objetivo não é simplesmente procurar palavras iguais, mas encontrar conteúdos que tenham significado semelhante.
+
+---
+
+### 4. FAISS procura os documentos mais relevantes
+
+O embedding da pergunta é enviado para o **FAISS** que compara o embedding da pergunta com os embeddings armazenados anteriormente e identifica os documentos mais semelhantes. No caso do Agente Lumina, ficou configurado para retornar os **3 documentos mais relevantes**.
+
+---
+
+### 5. RAG utiliza os documentos como contexto
+
+O RAG é uma arquitetura que combina duas etapas:
+
+* **Retrieval (recuperação):** encontrar informações relevantes na base de conhecimento.
+* **Generation (geração):** utilizar essas informações para gerar a resposta.
+
+No Agente Lumina, o FAISS realiza a recuperação dos documentos relevantes e esses documentos são utilizados como **contexto para o modelo de IA**, ou seja, o modelo de IA irá gerar uma resposta humanizada com base nas informações retornadas.
+
+---
+
+### 6. Gemini gera a resposta
+
+O **Google Gemini 3.6 Flash** é o modelo de linguagem utilizado como motor de geração do agente. Ele recebe a pergunta do usuário juntamente com o contexto recuperado pelo processo de RAG.
+
+A partir dessas informações, o Gemini interpreta o contexto e gera uma resposta adequada à pergunta.
+
+---
+
+### 7. A resposta retorna para o usuário
+
+Depois que o Gemini gera a resposta, o resultado retorna pela aplicação Flask até o frontend.
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+### 🤖 Inteligência Artificial
+
+| Tecnologia        | Utilização                                                             |
+| ----------------- | ---------------------------------------------------------------------- |
+| **Google Gemini** | Modelo de linguagem responsável pela geração das respostas             |
+| **LangChain**     | Integração e orquestração do fluxo de IA                               |
+| **Embeddings**    | Representação vetorial de perguntas e documentos                       |
+| **FAISS**         | Armazenamento e busca por similaridade entre vetores                   |
+| **RAG**           | Arquitetura que combina recuperação de contexto e geração de respostas |
+
+### 💻 Backend
+
+| Tecnologia   | Utilização                                   |
+| ------------ | -------------------------------------------- |
+| **Python**   | Linguagem principal do projeto               |
+| **Flask**    | Desenvolvimento do backend e API             |
+| **Gunicorn** | Servidor utilizado para executar a aplicação |
+
+### 🎨 Frontend
+
+* HTML
+* CSS
+* JavaScript
+
+O frontend é responsável pela interface do chat e pela comunicação com o backend.
+
+### 🐳 Infraestrutura
+
+| Tecnologia                            | Utilização                               |
+| ------------------------------------- | ---------------------------------------- |
+| **Docker**                            | Containerização da aplicação             |
+| **Oracle Cloud Infrastructure (OCI)** | Hospedagem da aplicação                  |
+| **OCI Container Registry (OCIR)**     | Armazenamento das imagens Docker         |
+| **OCI Load Balancer**                 | Distribuição do tráfego para a aplicação |
+
+---
+
+## ☁️ Deploy na Oracle Cloud
+
+Além do desenvolvimento do agente, o projeto também envolveu sua implantação em ambiente de nuvem utilizando a **Oracle Cloud Infrastructure (OCI)**.
+
+A aplicação foi containerizada com Docker e posteriormente disponibilizada em uma Compute Instance (máquina virtual) da Oracle Cloud. Para armazenar e distribuir a imagem Docker, foi utilizado o OCI Container Registry (OCIR). A imagem Docker foi construída para a arquitetura **AMD64**, armazenada no **OCI Container Registry** e executada em uma máquina virtual da OCI.
+
+Também foi configurado um Load Balancer, responsável por receber as requisições externas e encaminhá-las para a aplicação em execução na máquina virtual.
+
+---
+
+## 🔐 DNS, domínio e HTTPS
+
+Para disponibilizar o Agente Lumina com acesso externo, também foi configurado um DNS utilizando o DuckDNS, associando um domínio à infraestrutura da aplicação.
+
+Também foi configurado um certificado SSL/TLS, permitindo que a aplicação seja acessada utilizando HTTPS. O certificado é utilizado para estabelecer uma conexão criptografada entre o navegador do usuário e a infraestrutura da aplicação.
+
+Dessa forma, o projeto conta com:
+
+🌐 DuckDNS — gerenciamento do domínio e DNS.
+🔒 SSL/TLS — criptografia da comunicação através de HTTPS.
+⚖️ OCI Load Balancer — ponto de entrada para as requisições externas.
+☁️ OCI Compute Instance — máquina virtual responsável pela execução da aplicação.
+🐳 Docker — containerização do agente.
+
+---
+
+## 🌎 Fluxo completo da aplicação
+
+Considerando desde a pergunta do usuário até a infraestrutura de Cloud, o funcionamento completo pode ser representado assim:
+
+                         USUÁRIO
+                            │
+                            ↓
+                  🌐 Domínio DuckDNS
+                            │
+                            ↓
+                   🔒 HTTPS / SSL-TLS
+                            │
+                            ↓
+                  ⚖️ OCI Load Balancer
+                            │
+                            ↓
+                  ☁️ Compute Instance
+                            │
+                            ↓
+                      🐳 Docker
+                            │
+                            ↓
+                      Flask / API
+                            │
+                            ↓
+                        LangChain
+                            │
+                            ↓
+                     Embedding Model
+                            │
+                            ↓
+                          FAISS
+                            │
+                      3 documentos
+                       relevantes
+                            │
+                            ↓
+                           RAG
+                            │
+                   Pergunta + Contexto
+                            │
+                            ↓
+                     Gemini 3.6 Flash
+                            │
+                            ↓
+                         Resposta
+                            │
+                            ↓
+                         Usuário
+## 👩‍💻 Desenvolvido por
+
+**Maria Eduarda de Sales Miranda**
+
+Projeto desenvolvido para fins de estudo, formação e portfólio.
