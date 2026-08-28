@@ -12,7 +12,6 @@ A solução utiliza uma arquitetura baseada em **RAG (Retrieval-Augmented Genera
 
 Em vez de depender somente do conhecimento geral do modelo de IA, o agente realiza uma busca por informações relevantes e utiliza os documentos encontrados como contexto para o **Google Gemini** gerar a resposta.
 
----
 
 ## 🎯 Sobre o projeto
 
@@ -48,7 +47,6 @@ FAISS
 Base de conhecimento pronta
 ```
 
----
 
 ### 2. Usuário faz uma pergunta
 
@@ -64,7 +62,7 @@ API Flask
 LangChain
 ```
 
----
+
 
 ### 3. A pergunta é transformada em embedding
 
@@ -72,13 +70,13 @@ O **LangChain** atua como uma camada de integração entre os componentes utiliz
 
 A pergunta do usuário também é transformada em um **embedding** para comparar semanticamente a pergunta com os textos existentes na base. O objetivo não é simplesmente procurar palavras iguais, mas encontrar conteúdos que tenham significado semelhante.
 
----
+
 
 ### 4. FAISS procura os documentos mais relevantes
 
 O embedding da pergunta é enviado para o **FAISS** que compara o embedding da pergunta com os embeddings armazenados anteriormente e identifica os documentos mais semelhantes. No caso do Agente Lumina, ficou configurado para retornar os **3 documentos mais relevantes**.
 
----
+
 
 ### 5. RAG utiliza os documentos como contexto
 
@@ -89,7 +87,7 @@ O RAG é uma arquitetura que combina duas etapas:
 
 No Agente Lumina, o FAISS realiza a recuperação dos documentos relevantes e esses documentos são utilizados como **contexto para o modelo de IA**, ou seja, o modelo de IA irá gerar uma resposta humanizada com base nas informações retornadas.
 
----
+
 
 ### 6. Gemini gera a resposta
 
@@ -97,13 +95,13 @@ O **Google Gemini 3.6 Flash** é o modelo de linguagem utilizado como motor de g
 
 A partir dessas informações, o Gemini interpreta o contexto e gera uma resposta adequada à pergunta.
 
----
+
 
 ### 7. A resposta retorna para o usuário
 
 Depois que o Gemini gera a resposta, o resultado retorna pela aplicação Flask até o frontend.
 
----
+
 
 ## 🛠️ Tecnologias utilizadas
 
@@ -168,7 +166,7 @@ Dessa forma, o projeto conta com:
 ☁️ OCI Compute Instance — máquina virtual responsável pela execução da aplicação.
 🐳 Docker — containerização do agente.
 
----
+
 
 ## 🌎 Fluxo completo da aplicação
 
