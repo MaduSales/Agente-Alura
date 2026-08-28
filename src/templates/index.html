@@ -1,34 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Agente Lumina</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/sparkle_wand.png') }}" type="image/x-icon">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/book_favicon.png') }}" type="image/x-icon">
 </head>
+
 <body>
-    <div class="chat-container">
-        <header class="chat-header">
-            <div class="brand">
-                <div class="logo-container">
-                    <img src="{{ url_for('static', filename='img/sparkle_wand.png') }}" alt="Logo Lumina">
+
+    <div class="app-container">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+
+                <div class="sidebar-header">
+
+                    <div class="sidebar-logo">
+                        <i class="fas fa-book"></i>
+                    </div>
+
+                    <div class="sidebar-brand">
+                        <h2>LUMINA</h2>
+                        <p>
+                            Assistente de<br>
+                            Suporte Acadêmico
+                        </p>
+                    </div>
+
                 </div>
 
-                <div class="brand-text">
-                    <h1>LUMINA</h1>
-                    <p>Assistente de Suporte Acadêmico</p>
-                </div>
+                <!-- Botão fechar -->
+                <button class="sidebar-close" id="sidebarClose" aria-label="Fechar menu">
+                    <i class="fas fa-xmark"></i>
+                </button>
+
             </div>
-        </header>
-        <main class="chat-messages" id="chatMessages">
-            <div class="message bot-message">Olá! Sou o assistente virtual da Lumina. Como posso te ajudar com os cursos, matrículas ou suporte acadêmico hoje?</div>
-        </main>
-        <div class="chat-input-area">
-            <input type="text" id="userInput" placeholder="Digite sua dúvida..." autocomplete="off">
-            <button id="sendButton" onclick="sendMessage()"><img src="{{ url_for('static', filename='img/paper_plane.png')}}" alt="Avião de papel" srcset=""></button>
+
+
+            <!-- NOVO CHAT -->
+
+            <button class="new-chat-btn">
+
+                <i class="fas fa-comment"></i>
+
+                <span>Novo chat</span>
+
+            </button>
+
+
+            <!-- MENU -->
+
+            <nav class="sidebar-nav">
+
+                <a href="#" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Conversas</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <i class="fas fa-circle-info"></i>
+                    <span>Sobre o agente</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Dicas de estudo</span>
+                </a>
+
+                <a href="#" class="nav-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Calendário acadêmico</span>
+                </a>
+
+            </nav>
+
+
+            <!-- RODAPÉ -->
+
+            <div class="sidebar-footer">
+
+                <div class="help-section">
+
+                    <i class="fas fa-lightbulb"></i>
+
+                    <div class="help-text">
+
+                        <h3>Precisa de ajuda?</h3>
+
+                        <p>
+                            Estou aqui para auxiliar sempre que precisar.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p class="copyright">
+                    © 2024 Lumina<br>
+                    Todos os direitos reservados.
+                </p>
+
+            </div>
+
+        </aside>
+
+
+        <!-- FUNDO ESCURO DO MENU MOBILE -->
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+        <!-- =========================
+             ÁREA PRINCIPAL
+        ========================== -->
+
+        <div class="main-container">
+
+
+            <!-- HEADER -->
+
+            <header class="chat-header">
+
+                <div class="header-left">
+
+                    <!-- BOTÃO HAMBÚRGUER -->
+
+                    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+
+                    <div class="header-brand">
+
+                        <div class="header-logo">
+                            <i class="fas fa-book"></i>
+                        </div>
+
+                        <div>
+
+                            <h1>LUMINA</h1>
+
+                            <p>
+                                Assistente de Suporte Acadêmico
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 MENSAGENS
+            ========================== -->
+
+            <main class="chat-messages" id="chatMessages">
+            </main>
+
+
+            <!-- =========================
+                 INPUT
+            ========================== -->
+
+            <div class="chat-input-area">
+
+                <div class="input-wrapper">
+
+                    <input type="text" id="userInput" placeholder="Digite sua dúvida..." autocomplete="off">
+
+                    <button id="sendButton" class="send-btn" onclick="sendMessage()" aria-label="Enviar mensagem">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
+
     </div>
+
+
+    <!-- JAVASCRIPT -->
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
+
 </html>
