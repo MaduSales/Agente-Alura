@@ -4,7 +4,7 @@
 
 O **Agente Lumina** é uma aplicação de Inteligência Artificial capaz de responder perguntas utilizando informações específicas de uma base de conhecimento previamente carregada.
 
-**[Veja o site clicando aqui](https://agente-lumina.duckdns.org/)**
+**[ 📖 Veja o site clicando aqui](https://agente-lumina.duckdns.org/)**
 
 O projeto foi desenvolvido como parte da formação **Tech IA Builder do Oracle Next Education (ONE)**, uma etapa avançada do programa voltada para **Inteligência Artificial, Automação, Dados e Cloud**, e também contempla o desafio proposto pela **Alura**.
 
